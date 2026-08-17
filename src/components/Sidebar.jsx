@@ -1,4 +1,3 @@
-import React from 'react';
 import { SIDEBAR_ICONS, SidebarIcon } from './Icons.jsx';
 import styles from './Sidebar.module.css';
 

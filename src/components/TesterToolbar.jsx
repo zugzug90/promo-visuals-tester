@@ -1,0 +1,89 @@
+import { usePromo } from '../context/PromoContext.jsx';
+import styles from './TesterToolbar.module.css';
+
+const ASPECT_RATIOS = [
+  { label: '16 : 9', value: '16 / 9' },
+  { label: '1 : 1', value: '1 / 1' },
+  { label: '3 : 4', value: '3 / 4' },
+  { label: '4 : 3', value: '4 / 3' },
+];
+
+const FIT_MODES = [
+  { label: 'Cover (заполнить)', value: 'cover' },
+  { label: 'Contain (вписать)', value: 'contain' },
+];
+
+function TesterToolbar() {
+  const {
+    images,
+    clearAllImages,
+    randomizeAllImages,
+    aspectRatio,
+    setAspectRatio,
+    objectFit,
+    setObjectFit,
+  } = usePromo();
+
+  const count = Object.keys(images).length;
+
+  return (
+    <div className={styles.toolbar}>
+      <div className={styles.leftGroup}>
+        <div className={styles.tag}>
+          <span className={styles.pulseDot} />
+          <span>Тестер промо-карточек</span>
+        </div>
+
+        <div className={styles.controlGroup}>
+          <span className={styles.label}>Соотношение сторон:</span>
+          <div className={styles.btnGroup}>
+            {ASPECT_RATIOS.map((item) => (
+              <button
+                key={item.value}
+                className={`${styles.toggleBtn} ${
+                  aspectRatio === item.value ? styles.active : ''
+                }`}
+                onClick={() => setAspectRatio(item.value)}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.controlGroup}>
+          <span className={styles.label}>Подгонка:</span>
+          <div className={styles.btnGroup}>
+            {FIT_MODES.map((item) => (
+              <button
+                key={item.value}
+                className={`${styles.toggleBtn} ${
+                  objectFit === item.value ? styles.active : ''
+                }`}
+                onClick={() => setObjectFit(item.value)}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.rightGroup}>
+        <div className={styles.counterBadge}>
+          🖼️ Активных карточек: <strong>{count}</strong>
+        </div>
+
+        <button className={styles.clearBtn} onClick={randomizeAllImages} title="Выбрать случайные промо из образцов">
+          🎲 Перемешать случайные
+        </button>
+
+        <button className={styles.clearBtn} onClick={clearAllImages} title="Сбросить всё">
+          🗑️ Сбросить всё
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default TesterToolbar;

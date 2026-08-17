@@ -1,12 +1,78 @@
-import React from 'react';
+import { useState, useRef } from 'react';
 import { SearchIcon, ArrowRightIcon } from './Icons.jsx';
 import { SMALL_GAMES, MY_GAMES_LINK } from '../data/games.js';
+import { usePromo } from '../context/PromoContext.jsx';
 import styles from './TopBar.module.css';
 
 function SmallGameTile({ game }) {
+  const { images, setCardImage, objectFit } = usePromo();
+  const [isDraggingOver, setIsDraggingOver] = useState(false);
+  const dragCounter = useRef(0);
+
+  const customImage = images[game.id];
+
+  const handleFile = (file) => {
+    if (!file || !file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = (e) => setCardImage(game.id, e.target.result);
+    reader.readAsDataURL(file);
+  };
+
+  const handleDragEnter = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounter.current += 1;
+    if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
+      setIsDraggingOver(true);
+    }
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounter.current -= 1;
+    if (dragCounter.current === 0) {
+      setIsDraggingOver(false);
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounter.current = 0;
+    setIsDraggingOver(false);
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      handleFile(e.dataTransfer.files[0]);
+    }
+  };
+
   return (
-    <div className={styles.smallTile}>
-      <div className={styles.smallThumb} style={{ background: game.color }} />
+    <div
+      className={`${styles.smallTile} ${isDraggingOver ? styles.smallTileDragging : ''}`}
+      onDragEnter={handleDragEnter}
+      onDragLeave={handleDragLeave}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+    >
+      <div
+        className={styles.smallThumb}
+        style={{ background: customImage ? '#141416' : game.color }}
+      >
+        {customImage && (
+          <img
+            src={customImage}
+            alt={game.title}
+            className={styles.smallUploadedImage}
+            style={{ objectFit: objectFit || 'cover' }}
+          />
+        )}
+        {isDraggingOver && <div className={styles.smallDropOverlay}>📥</div>}
+      </div>
       <span className={styles.smallTitle}>{game.title}</span>
     </div>
   );

@@ -1,4 +1,3 @@
-import React from 'react';
 import GameCard from './GameCard.jsx';
 import styles from './GamesSection.module.css';
 

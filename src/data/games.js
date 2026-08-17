@@ -1,3 +1,5 @@
+import { AppConfig } from '../config/AppConfig.js';
+
 // Game data model
 export class Game {
   constructor({ id, title, color, score, badge, tag }) {
@@ -66,9 +68,36 @@ export const SMALL_GAMES = Array.from({ length: 14 }, (_, i) => new Game({
 
 export const MY_GAMES_LINK = { id: 'my', title: 'Мои игры' };
 
+// 6 cards per row in the grid layout
+const CARDS_PER_ROW = 6;
+const topSectionRows = AppConfig?.rowsPerRecommendedGamesTopSection ?? 4;
+const topSectionGamesCount = topSectionRows * CARDS_PER_ROW;
+
+let currentOffset = 0;
+const section1Games = makeGames(topSectionGamesCount, currentOffset);
+currentOffset += topSectionGamesCount;
+
+const section2Games = makeGames(6, currentOffset);
+currentOffset += 6;
+
+const section3Games = makeGames(12, currentOffset);
+currentOffset += 12;
+
+const section4Games = makeGames(6, currentOffset);
+currentOffset += 6;
+
 export const SECTIONS = [
-  new GameSection({ id: 1, title: 'Рекомендованные игры', games: makeGames(12, 0) }),
-  new GameSection({ id: 2, title: 'Рекомендованные игры', games: makeGames(6, 12) }),
-  new GameSection({ id: 3, title: 'Популярные сегодня', games: makeGames(12, 18) }),
-  new GameSection({ id: 4, title: 'Новинки', games: makeGames(6, 30) }),
+  new GameSection({ id: 1, title: 'Рекомендованные игры', games: section1Games }),
+  new GameSection({ id: 2, title: 'Рекомендованные игры', games: section2Games }),
+  new GameSection({ id: 3, title: 'Популярные сегодня', games: section3Games }),
+  new GameSection({ id: 4, title: 'Новинки', games: section4Games }),
 ];
+
+export function getAllGameIds() {
+  const ids = [];
+  SECTIONS.forEach((section) => {
+    section.games.forEach((game) => ids.push(game.id));
+  });
+  SMALL_GAMES.forEach((game) => ids.push(game.id));
+  return ids;
+}
