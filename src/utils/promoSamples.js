@@ -8,6 +8,16 @@ export const PROMO_SAMPLE_IMAGES = Array.from(
 );
 
 /**
+ * List of available square icon samples in public/promo_icons_samples
+ */
+export const PROMO_ICON_IMAGES = [
+  '/promo_icons_samples/pjpg128x128_x9wA.webp',
+  ...Array.from({ length: 14 }, (_, i) =>
+    `/promo_icons_samples/pjpg128x128_${String(i + 2).padStart(3, '0')}_x9wA.webp`
+  ),
+];
+
+/**
  * Fisher-Yates shuffle helper
  */
 export function shuffleArray(array) {
@@ -20,7 +30,7 @@ export function shuffleArray(array) {
 }
 
 /**
- * Get a single random sample image URL
+ * Get a single random sample cover image URL
  */
 export function getRandomSampleImage() {
   const index = Math.floor(Math.random() * PROMO_SAMPLE_IMAGES.length);
@@ -28,10 +38,30 @@ export function getRandomSampleImage() {
 }
 
 /**
+ * Get a single random icon image URL
+ */
+export function getRandomIconImage() {
+  const index = Math.floor(Math.random() * PROMO_ICON_IMAGES.length);
+  return PROMO_ICON_IMAGES[index];
+}
+
+/**
  * Generate a mapping of game IDs to random promo cover images
  */
 export function generateRandomImageMap(gameIds) {
   const shuffled = shuffleArray(PROMO_SAMPLE_IMAGES);
+  const result = {};
+  gameIds.forEach((id, index) => {
+    result[id] = shuffled[index % shuffled.length];
+  });
+  return result;
+}
+
+/**
+ * Generate a mapping of icon-strip game IDs to random square icon images
+ */
+export function generateRandomIconMap(gameIds) {
+  const shuffled = shuffleArray(PROMO_ICON_IMAGES);
   const result = {};
   gameIds.forEach((id, index) => {
     result[id] = shuffled[index % shuffled.length];

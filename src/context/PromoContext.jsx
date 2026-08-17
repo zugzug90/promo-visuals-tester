@@ -1,7 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, useEffect } from 'react';
-import { getAllGameIds } from '../data/games.js';
-import { generateRandomImageMap, getRandomSampleImage } from '../utils/promoSamples.js';
+import { getAllGameIds, ICON_STRIP_GAMES } from '../data/games.js';
+import {
+  generateRandomImageMap,
+  generateRandomIconMap,
+  getRandomSampleImage,
+} from '../utils/promoSamples.js';
 
 const PromoContext = createContext();
 
@@ -40,7 +44,10 @@ export function PromoProvider({ children }) {
 
   const [sampleImages, setSampleImages] = useState(() => {
     const allGameIds = getAllGameIds();
-    return generateRandomImageMap(allGameIds);
+    const coverMap = generateRandomImageMap(allGameIds);
+    // Override icon-strip slots with icon-specific samples
+    const iconMap = generateRandomIconMap(ICON_STRIP_GAMES.map((g) => g.id));
+    return { ...coverMap, ...iconMap };
   });
 
   const [aspectRatio, setAspectRatio] = useState('16 / 9');
@@ -84,7 +91,9 @@ export function PromoProvider({ children }) {
     const allGameIds = getAllGameIds();
     // Reshuffle sample images for unassigned slots; custom uploaded images remain in place
     const newSampleMap = generateRandomImageMap(allGameIds);
-    setSampleImages(newSampleMap);
+    // Regenerate icon strip from icon-specific pool
+    const newIconMap = generateRandomIconMap(ICON_STRIP_GAMES.map((g) => g.id));
+    setSampleImages({ ...newSampleMap, ...newIconMap });
   };
 
   const clearAllImages = () => {

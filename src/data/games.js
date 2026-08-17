@@ -66,6 +66,16 @@ export const SMALL_GAMES = Array.from({ length: 14 }, (_, i) => new Game({
   tag: null,
 }));
 
+// Icon strip games — shown as square 1:1 tiles above the promo sections
+export const ICON_STRIP_GAMES = Array.from({ length: 16 }, (_, i) => new Game({
+  id: 2000 + i,
+  title: TITLES[(i + 7) % TITLES.length],
+  color: PALETTE[(i + 9) % PALETTE.length],
+  score: null,
+  badge: null,
+  tag: null,
+}));
+
 export const MY_GAMES_LINK = { id: 'my', title: 'Мои игры' };
 
 // 6 cards per row in the grid layout
@@ -99,5 +109,6 @@ export function getAllGameIds() {
     section.games.forEach((game) => ids.push(game.id));
   });
   SMALL_GAMES.forEach((game) => ids.push(game.id));
+  ICON_STRIP_GAMES.forEach((game) => ids.push(game.id));
   return ids;
 }
