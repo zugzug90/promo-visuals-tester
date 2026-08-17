@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { usePromo } from '../context/PromoContext.jsx';
+import { greenRatingThreshold } from '../config/AppConfig.js';
 import styles from './GameCard.module.css';
 
 function GameCard({ game }) {
@@ -121,6 +122,15 @@ function GameCard({ game }) {
           <div className={styles.tagTurbo}>⚡ Турбо</div>
         )}
 
+        {/* Score badge — bottom-left corner of thumb */}
+        {game.score !== null && (
+          <div
+            className={`${styles.score} ${game.score > greenRatingThreshold ? styles.scoreGreen : ''}`}
+          >
+            {game.score}
+          </div>
+        )}
+
         {/* Hover action overlay */}
         <div className={styles.actionOverlay}>
           <button
@@ -151,13 +161,6 @@ function GameCard({ game }) {
               <span className={styles.dropMessage}>Отпустите картинку</span>
             </div>
           </div>
-        )}
-      </div>
-
-      <div className={styles.info}>
-        <span className={styles.title}>{game.title}</span>
-        {game.score !== null && (
-          <span className={styles.score}>{game.score}</span>
         )}
       </div>
     </div>
