@@ -14,9 +14,24 @@ export const AppConfig = {
    * с ярко-зелёным фоном вместо стандартного серого.
    */
   greenRatingThreshold: 75,
+
+  /**
+   * Цвет пульсирующей обводки "Мои Обложки".
+   * Любой валидный CSS-цвет: '#rrggbb', 'hsl(...)', 'rgba(...)' и т.д.
+   */
+  myCoversPulseColor: '#ffe033',
+
+  /**
+   * Период одного цикла пульсации "Мои Обложки" в миллисекундах.
+   * Дефолт: 3000 мс (3 секунды).
+   */
+  myCoversPulseDurationMs: 3000,
 };
 
 export const rowsPerRecommendedGamesTopSection = AppConfig.rowsPerRecommendedGamesTopSection;
 export const greenRatingThreshold = AppConfig.greenRatingThreshold;
+export const myCoversPulseColor = AppConfig.myCoversPulseColor;
+export const myCoversPulseDurationMs = AppConfig.myCoversPulseDurationMs;
 
 export default AppConfig;
+

@@ -23,6 +23,8 @@ function TesterToolbar() {
     setAspectRatio,
     objectFit,
     setObjectFit,
+    highlightMyCovers,
+    toggleHighlightMyCovers,
   } = usePromo();
 
   const count = Object.keys(images).length;
@@ -83,6 +85,14 @@ function TesterToolbar() {
 
         <button className={styles.clearBtn} onClick={randomizeAllImages} title="Выбрать случайные промо из образцов">
           🎲 Перемешать случайные
+        </button>
+
+        <button
+          className={`${styles.highlightBtn} ${highlightMyCovers ? styles.highlightBtnActive : ''}`}
+          onClick={toggleHighlightMyCovers}
+          title="Подсветить карточки с вашими загрузками"
+        >
+          {highlightMyCovers ? '💡 Скрыть Мои Обложки' : '💡 Подсветить Мои Обложки'}
         </button>
 
         <button className={styles.clearBtn} onClick={clearAllImages} title="Сбросить всё">

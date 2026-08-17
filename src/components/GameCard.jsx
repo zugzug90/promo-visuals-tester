@@ -1,10 +1,10 @@
 import { useState, useRef } from 'react';
 import { usePromo } from '../context/PromoContext.jsx';
-import { greenRatingThreshold } from '../config/AppConfig.js';
+import { greenRatingThreshold, myCoversPulseColor, myCoversPulseDurationMs } from '../config/AppConfig.js';
 import styles from './GameCard.module.css';
 
 function GameCard({ game }) {
-  const { images, isUploaded, setCardImage, removeCardImage, aspectRatio, objectFit } = usePromo();
+  const { images, isUploaded, setCardImage, removeCardImage, aspectRatio, objectFit, highlightMyCovers } = usePromo();
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   const dragCounter = useRef(0);
   const fileInputRef = useRef(null);
@@ -73,9 +73,15 @@ function GameCard({ game }) {
     removeCardImage(game.id);
   };
 
+  const isHighlighted = highlightMyCovers && hasUserUpload;
+
   return (
     <div
-      className={`${styles.card} ${isDraggingOver ? styles.cardDragging : ''}`}
+      className={`${styles.card} ${isDraggingOver ? styles.cardDragging : ''} ${isHighlighted ? styles.cardHighlighted : ''}`}
+      style={isHighlighted ? {
+        '--pulse-color': myCoversPulseColor,
+        '--pulse-duration': `${myCoversPulseDurationMs}ms`,
+      } : undefined}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
       onDragOver={handleDragOver}
@@ -112,11 +118,7 @@ function GameCard({ game }) {
           </div>
         )}
 
-        {hasUserUpload && (
-          <div className={styles.uploadedBadge} title="Ваше изображение зафиксировано на этой позиции">
-            📌 Своё
-          </div>
-        )}
+
 
         {game.tag === 'Турбо' && (
           <div className={styles.tagTurbo}>⚡ Турбо</div>

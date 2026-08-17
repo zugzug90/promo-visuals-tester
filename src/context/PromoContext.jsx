@@ -52,6 +52,9 @@ export function PromoProvider({ children }) {
 
   const [aspectRatio, setAspectRatio] = useState('16 / 9');
   const [objectFit, setObjectFit] = useState('cover');
+  const [highlightMyCovers, setHighlightMyCovers] = useState(false);
+
+  const toggleHighlightMyCovers = () => setHighlightMyCovers((v) => !v);
 
   // Persist custom uploaded images to localStorage
   useEffect(() => {
@@ -124,6 +127,8 @@ export function PromoProvider({ children }) {
         setAspectRatio,
         objectFit,
         setObjectFit,
+        highlightMyCovers,
+        toggleHighlightMyCovers,
       }}
     >
       {children}

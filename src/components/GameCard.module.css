@@ -235,3 +235,32 @@
   color: #ffffff;
   box-shadow: 0 1px 6px rgba(53, 193, 59, 0.5);
 }
+
+/* ── My Covers highlight ── */
+.cardHighlighted {
+  animation: coverPulse var(--pulse-duration, 3s) ease-in-out infinite;
+  z-index: 3;
+  border-radius: 8px;
+}
+
+@keyframes coverPulse {
+  0%   {
+    box-shadow:
+      0 0 0 2px   var(--pulse-color, #ffe033),
+      0 0 14px    color-mix(in srgb, var(--pulse-color, #ffe033) 55%, transparent),
+      0 0 30px    color-mix(in srgb, var(--pulse-color, #ffe033) 25%, transparent);
+  }
+  50%  {
+    box-shadow:
+      0 0 0 3.5px var(--pulse-color, #ffe033),
+      0 0 28px    var(--pulse-color, #ffe033),
+      0 0 60px    color-mix(in srgb, var(--pulse-color, #ffe033) 55%, transparent),
+      0 0 90px    color-mix(in srgb, var(--pulse-color, #ffe033) 20%, transparent);
+  }
+  100% {
+    box-shadow:
+      0 0 0 2px   var(--pulse-color, #ffe033),
+      0 0 14px    color-mix(in srgb, var(--pulse-color, #ffe033) 55%, transparent),
+      0 0 30px    color-mix(in srgb, var(--pulse-color, #ffe033) 25%, transparent);
+  }
+}
