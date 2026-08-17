@@ -217,23 +217,23 @@
 
 .score {
   position: absolute;
-  bottom: 6px;
-  left: 6px;
+  bottom: 0;
+  left: 0;
   z-index: 3;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.9);
-  background: rgba(60, 60, 62, 0.82);
-  border-radius: 6px;
-  padding: 2px 7px;
+  color: rgba(255, 255, 255, 0.95);
+  background: #6a6869;
+  border-radius: 0 8px 0 0;
+  padding: 3px 9px;
   backdrop-filter: blur(4px);
   pointer-events: none;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+  box-shadow: 2px -2px 6px rgba(0, 0, 0, 0.35);
   transition: background 0.2s ease;
 }
 
 .scoreGreen {
-  background: #22c55e;
+  background: #35c13b;
   color: #ffffff;
-  box-shadow: 0 1px 6px rgba(34, 197, 94, 0.5);
+  box-shadow: 0 1px 6px rgba(53, 193, 59, 0.5);
 }
