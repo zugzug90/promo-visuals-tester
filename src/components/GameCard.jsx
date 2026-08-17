@@ -3,12 +3,13 @@ import { usePromo } from '../context/PromoContext.jsx';
 import styles from './GameCard.module.css';
 
 function GameCard({ game }) {
-  const { images, setCardImage, removeCardImage, aspectRatio, objectFit } = usePromo();
+  const { images, isUploaded, setCardImage, removeCardImage, aspectRatio, objectFit } = usePromo();
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   const dragCounter = useRef(0);
   const fileInputRef = useRef(null);
 
   const customImage = images[game.id];
+  const hasUserUpload = isUploaded(game.id);
 
   const handleFile = (file) => {
     if (!file || !file.type.startsWith('image/')) {
@@ -110,6 +111,12 @@ function GameCard({ game }) {
           </div>
         )}
 
+        {hasUserUpload && (
+          <div className={styles.uploadedBadge} title="Ваше изображение зафиксировано на этой позиции">
+            📌 Своё
+          </div>
+        )}
+
         {game.tag === 'Турбо' && (
           <div className={styles.tagTurbo}>⚡ Турбо</div>
         )}
@@ -120,16 +127,16 @@ function GameCard({ game }) {
             type="button"
             className={styles.actionBtn}
             onClick={triggerFilePicker}
-            title={customImage ? 'Заменить картинку' : 'Выбрать файл'}
+            title={hasUserUpload ? 'Заменить картинку' : 'Загрузить картинку'}
           >
-            {customImage ? '🔄' : '📁'}
+            {hasUserUpload ? '🔄' : '📁'}
           </button>
-          {customImage && (
+          {hasUserUpload && (
             <button
               type="button"
               className={`${styles.actionBtn} ${styles.deleteBtn}`}
               onClick={handleClearImage}
-              title="Сбросить картинку"
+              title="Удалить загруженное промо"
             >
               🗑️
             </button>

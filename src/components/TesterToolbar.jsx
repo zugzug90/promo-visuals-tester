@@ -16,6 +16,7 @@ const FIT_MODES = [
 function TesterToolbar() {
   const {
     images,
+    uploadedImages,
     clearAllImages,
     randomizeAllImages,
     aspectRatio,
@@ -25,6 +26,7 @@ function TesterToolbar() {
   } = usePromo();
 
   const count = Object.keys(images).length;
+  const uploadedCount = Object.keys(uploadedImages || {}).length;
 
   return (
     <div className={styles.toolbar}>
@@ -71,7 +73,12 @@ function TesterToolbar() {
 
       <div className={styles.rightGroup}>
         <div className={styles.counterBadge}>
-          🖼️ Активных карточек: <strong>{count}</strong>
+          🖼️ Карточек: <strong>{count}</strong>
+          {uploadedCount > 0 && (
+            <span style={{ marginLeft: '6px', opacity: 0.85, fontSize: '0.85em', color: '#a394ff' }}>
+              (загружено: <strong>{uploadedCount}</strong>)
+            </span>
+          )}
         </div>
 
         <button className={styles.clearBtn} onClick={randomizeAllImages} title="Выбрать случайные промо из образцов">
