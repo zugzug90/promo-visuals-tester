@@ -1,0 +1,25 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+  background: #1e1e20;
+  font-family: 'YS Text', 'Helvetica Neue', Arial, sans-serif;
+  color: #fff;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.content {
+  padding: 20px 20px 40px;
+  overflow-y: auto;
+  flex: 1;
+}
