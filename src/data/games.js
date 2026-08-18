@@ -47,14 +47,19 @@ const TITLES = [
 ];
 
 function makeGames(count, offset = 0) {
-  return Array.from({ length: count }, (_, i) => new Game({
-    id: offset + i,
-    title: TITLES[(offset + i) % TITLES.length],
-    color: PALETTE[(offset + i) % PALETTE.length],
-    score: Math.floor(Math.random() * 60 + 30),
-    badge: (offset + i) % 7 === 0 ? 'Топовая' : null,
-    tag: (offset + i) % 5 === 0 ? 'Турбо' : null,
-  }));
+  return Array.from({ length: count }, (_, i) => {
+    const isFirstSection = offset === 0;
+    const isNewGameBadge = isFirstSection && ((i >= 0 && i < 2) || (i >= 6 && i < 9));
+
+    return new Game({
+      id: offset + i,
+      title: TITLES[(offset + i) % TITLES.length],
+      color: PALETTE[(offset + i) % PALETTE.length],
+      score: Math.floor(Math.random() * 60 + 30),
+      badge: isNewGameBadge ? 'Новая игра' : ((offset + i) % 7 === 0 ? 'Топовая' : null),
+      tag: (offset + i) % 5 === 0 ? 'Турбо' : null,
+    });
+  });
 }
 
 export const SMALL_GAMES = Array.from({ length: 14 }, (_, i) => new Game({

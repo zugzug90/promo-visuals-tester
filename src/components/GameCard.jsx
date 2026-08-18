@@ -95,7 +95,11 @@ function GameCard({ game }) {
         style={{ display: 'none' }}
       />
 
-      {game.badge && <div className={styles.badge}>{game.badge}</div>}
+      {game.badge && (
+        <div className={`${styles.badge} ${game.badge === 'Новая игра' ? styles.badgeNew : ''}`}>
+          {game.badge}
+        </div>
+      )}
 
       <div
         className={styles.thumb}
