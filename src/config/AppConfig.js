@@ -34,6 +34,23 @@ export const AppConfig = {
   watermarkOpacity: 0.25,
 
   /**
+   * Сила затемнения при наведении на карточку.
+   * Значение от 0 до 1, где 0 = нет затемнения, 1 = очень тёмное.
+   */
+  cardHoverDarkness: 0.18,
+
+  /**
+   * Размер шрифта названия игры в карточке.
+   * Можно задать в px, rem и других валидных CSS-единицах.
+   */
+  cardTitleFontSize: '12px',
+
+  /**
+   * Цвет названия игры на карточке.
+   */
+  cardTitleColor: '#ffffff',
+
+  /**
    * Период одного цикла пульсации "Мои Обложки" в миллисекундах.
    * Дефолт: 3000 мс (3 секунды).
    */
@@ -45,6 +62,9 @@ export const greenRatingThreshold = AppConfig.greenRatingThreshold;
 export const myCoversPulseColor = AppConfig.myCoversPulseColor;
 export const watermarkColor = AppConfig.watermarkColor;
 export const watermarkOpacity = AppConfig.watermarkOpacity;
+export const cardHoverDarkness = AppConfig.cardHoverDarkness;
+export const cardTitleFontSize = AppConfig.cardTitleFontSize;
+export const cardTitleColor = AppConfig.cardTitleColor;
 export const myCoversPulseDurationMs = AppConfig.myCoversPulseDurationMs;
 
 export default AppConfig;

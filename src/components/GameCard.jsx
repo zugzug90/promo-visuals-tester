@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { usePromo } from '../context/PromoContext.jsx';
-import { greenRatingThreshold, myCoversPulseColor, myCoversPulseDurationMs } from '../config/AppConfig.js';
+import { greenRatingThreshold, myCoversPulseColor, myCoversPulseDurationMs, cardHoverDarkness, cardTitleFontSize, cardTitleColor } from '../config/AppConfig.js';
 import styles from './GameCard.module.css';
 
 function GameCard({ game }) {
@@ -75,13 +75,21 @@ function GameCard({ game }) {
 
   const isHighlighted = highlightMyCovers && hasUserUpload;
 
+  const cardStyle = {
+    '--card-hover-darkness': cardHoverDarkness,
+    '--card-title-font-size': cardTitleFontSize,
+    '--card-title-color': cardTitleColor,
+  };
+
+  if (isHighlighted) {
+    cardStyle['--pulse-color'] = myCoversPulseColor;
+    cardStyle['--pulse-duration'] = `${myCoversPulseDurationMs}ms`;
+  }
+
   return (
     <div
       className={`${styles.card} ${isDraggingOver ? styles.cardDragging : ''} ${isHighlighted ? styles.cardHighlighted : ''}`}
-      style={isHighlighted ? {
-        '--pulse-color': myCoversPulseColor,
-        '--pulse-duration': `${myCoversPulseDurationMs}ms`,
-      } : undefined}
+      style={cardStyle}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
       onDragOver={handleDragOver}
@@ -122,11 +130,7 @@ function GameCard({ game }) {
           </div>
         )}
 
-
-
-        {game.tag === 'Турбо' && (
-          <div className={styles.tagTurbo}>⚡ Турбо</div>
-        )}
+        <div className={styles.gameTitle}>{game.title}</div>
 
         {/* Score badge — bottom-left corner of thumb */}
         {game.score !== null && (
