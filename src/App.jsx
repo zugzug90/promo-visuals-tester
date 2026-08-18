@@ -4,12 +4,21 @@ import IconStrip from './components/IconStrip.jsx';
 import TesterToolbar from './components/TesterToolbar.jsx';
 import { PromoProvider } from './context/PromoContext.jsx';
 import { SECTIONS } from './data/games.js';
+import { AppConfig } from './config/AppConfig.js';
 import './App.css';
 
 function App() {
+  const { watermarkColor, watermarkOpacity } = AppConfig;
+
   return (
     <PromoProvider>
       <div className="app">
+        <div
+          className="watermark"
+          style={{ color: watermarkColor, opacity: watermarkOpacity }}
+        >
+          @TheRoom606
+        </div>
         <Sidebar />
         <div className="main">
           <div className="content">

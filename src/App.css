@@ -3,11 +3,28 @@
 }
 
 .app {
+  position: relative;
   display: flex;
   min-height: 100vh;
   background: #1e1e20;
   font-family: 'YS Text', 'Helvetica Neue', Arial, sans-serif;
   color: #fff;
+}
+
+.watermark {
+  position: absolute;
+  top: 100px;
+  right: 18px;
+  z-index: 10;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  transform: rotate(30deg);
+  transform-origin: top right;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
 }
 
 .main {

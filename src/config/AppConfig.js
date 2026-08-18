@@ -22,6 +22,18 @@ export const AppConfig = {
   myCoversPulseColor: '#ffe033',
 
   /**
+   * Цвет водяного знака в правом верхнем углу.
+   * Любой валидный CSS-цвет: '#rrggbb', 'hsl(...)', 'rgba(...)' и т.д.
+   */
+  watermarkColor: '#4dc8ff',
+
+  /**
+   * Прозрачность водяного знака.
+   * Значение от 0 до 1, где 0 = полностью прозрачный, 1 = полностью непрозрачный.
+   */
+  watermarkOpacity: 0.25,
+
+  /**
    * Период одного цикла пульсации "Мои Обложки" в миллисекундах.
    * Дефолт: 3000 мс (3 секунды).
    */
@@ -31,6 +43,8 @@ export const AppConfig = {
 export const rowsPerRecommendedGamesTopSection = AppConfig.rowsPerRecommendedGamesTopSection;
 export const greenRatingThreshold = AppConfig.greenRatingThreshold;
 export const myCoversPulseColor = AppConfig.myCoversPulseColor;
+export const watermarkColor = AppConfig.watermarkColor;
+export const watermarkOpacity = AppConfig.watermarkOpacity;
 export const myCoversPulseDurationMs = AppConfig.myCoversPulseDurationMs;
 
 export default AppConfig;

@@ -95,6 +95,17 @@ function TesterToolbar() {
           {highlightMyCovers ? '💡 Скрыть Мои Обложки' : '💡 Подсветить Мои Обложки'}
         </button>
 
+        <a
+          className={styles.linkBtn}
+          href="https://telegram.me/TheRoom606"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Перейти в канал автора: TG @TheRoom606"
+        >
+          <img className={styles.linkIcon} src="/telegram_icon.png" alt="Telegram" />
+          <span>Канал Автора (@TheRoom606)</span>
+        </a>
+
         <button className={styles.clearBtn} onClick={clearAllImages} title="Сбросить всё">
           🗑️ Сбросить всё
         </button>
