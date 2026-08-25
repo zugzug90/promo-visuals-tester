@@ -13,6 +13,8 @@ const FIT_MODES = [
   { label: 'Contain (вписать)', value: 'contain' },
 ];
 
+const TELEGRAM_ICON_SRC = `${import.meta.env.BASE_URL}telegram_icon.png`;
+
 function TesterToolbar() {
   const {
     images,
@@ -102,7 +104,7 @@ function TesterToolbar() {
           rel="noopener noreferrer"
           title="Перейти в канал автора: TG @TheRoom606"
         >
-          <img className={styles.linkIcon} src="/telegram_icon.png" alt="Telegram" />
+          <img className={styles.linkIcon} src={TELEGRAM_ICON_SRC} alt="Telegram" />
           <span>Канал Автора (@TheRoom606)</span>
         </a>
 

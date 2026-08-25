@@ -2,18 +2,25 @@
  * List of available sample promo covers in public/promo_covers_samples
  * Files range from pjpg928x522_211.webp to pjpg928x522_466.webp (256 images total)
  */
+const BASE_URL = import.meta.env.BASE_URL || '/';
+const buildPublicPath = (relativePath) => {
+  const normalizedBase = BASE_URL.endsWith('/') ? BASE_URL : `${BASE_URL}/`;
+  const normalizedPath = relativePath.replace(/^\/+/, '');
+  return `${normalizedBase}${normalizedPath}`;
+};
+
 export const PROMO_SAMPLE_IMAGES = Array.from(
   { length: 256 },
-  (_, i) => `/promo_covers_samples/pjpg928x522_${211 + i}.webp`
+  (_, i) => buildPublicPath(`promo_covers_samples/pjpg928x522_${211 + i}.webp`)
 );
 
 /**
  * List of available square icon samples in public/promo_icons_samples
  */
 export const PROMO_ICON_IMAGES = [
-  '/promo_icons_samples/pjpg128x128_x9wA.webp',
+  buildPublicPath('promo_icons_samples/pjpg128x128_x9wA.webp'),
   ...Array.from({ length: 14 }, (_, i) =>
-    `/promo_icons_samples/pjpg128x128_${String(i + 2).padStart(3, '0')}_x9wA.webp`
+    buildPublicPath(`promo_icons_samples/pjpg128x128_${String(i + 2).padStart(3, '0')}_x9wA.webp`)
   ),
 ];
 
