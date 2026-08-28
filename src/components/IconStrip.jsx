@@ -97,7 +97,7 @@ function IconTile({ game }) {
           <img
             src={customImage}
             alt={game.title}
-            className={styles.uploadedImage}
+            className={`${styles.uploadedImage} iconBlurTarget`}
             style={{ objectFit: objectFit || 'cover' }}
           />
         ) : (

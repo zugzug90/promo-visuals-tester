@@ -9,13 +9,19 @@ import { AppConfig } from './config/AppConfig.js';
 import './App.css';
 
 function App() {
-  const { watermarkColor, watermarkOpacity } = AppConfig;
+  const { watermarkColor, watermarkOpacity, defaultIconBlurPercent } = AppConfig;
   const [isGrayscaleMode, setIsGrayscaleMode] = useState(false);
+  const [isBlurMode, setIsBlurMode] = useState(false);
   const toggleGrayscaleMode = () => setIsGrayscaleMode((prev) => !prev);
+  const toggleBlurMode = () => setIsBlurMode((prev) => !prev);
+  const iconBlurPixels = `${defaultIconBlurPercent / 5}px`;
 
   return (
     <PromoProvider>
-      <div className={`app${isGrayscaleMode ? ' grayscale' : ''}`}>
+      <div
+        className={`app${isGrayscaleMode ? ' grayscale' : ''}${isBlurMode ? ' blur' : ''}`}
+        style={{ '--icon-blur': iconBlurPixels }}
+      >
         <div
           className="watermark"
           style={{ color: watermarkColor, opacity: watermarkOpacity }}
@@ -28,6 +34,8 @@ function App() {
             <TesterToolbar
               isGrayscaleMode={isGrayscaleMode}
               toggleGrayscaleMode={toggleGrayscaleMode}
+              isBlurMode={isBlurMode}
+              toggleBlurMode={toggleBlurMode}
             />
             <IconStrip />
             {SECTIONS.map((section) => (

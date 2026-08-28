@@ -15,7 +15,7 @@ const FIT_MODES = [
 
 const TELEGRAM_ICON_SRC = `${import.meta.env.BASE_URL}telegram_icon.png`;
 
-function TesterToolbar({ isGrayscaleMode, toggleGrayscaleMode }) {
+function TesterToolbar({ isGrayscaleMode, toggleGrayscaleMode, isBlurMode, toggleBlurMode }) {
   const {
     images,
     uploadedImages,
@@ -105,6 +105,14 @@ function TesterToolbar({ isGrayscaleMode, toggleGrayscaleMode }) {
           {isGrayscaleMode ? '🖤 Выключить ЧБ' : '🖤 Включить ЧБ'}
         </button>
 
+        <button
+          className={`${styles.modeBtn} ${isBlurMode ? styles.modeBtnActive : ''}`}
+          onClick={toggleBlurMode}
+          title="Включить или выключить размытие иконок"
+        >
+          {isBlurMode ? '🌫️ Выключить размытие' : '🌫️ Включить размытие'}
+        </button>
+
         <a
           className={styles.linkBtn}
           href="https://telegram.me/TheRoom606"
@@ -112,7 +120,7 @@ function TesterToolbar({ isGrayscaleMode, toggleGrayscaleMode }) {
           rel="noopener noreferrer"
           title="Перейти в канал автора: TG @TheRoom606"
         >
-          <img className={styles.linkIcon} src={TELEGRAM_ICON_SRC} alt="Telegram" />
+          <img className={`${styles.linkIcon} iconBlurTarget`} src={TELEGRAM_ICON_SRC} alt="Telegram" />
           <span>Канал Автора (@TheRoom606)</span>
         </a>
 

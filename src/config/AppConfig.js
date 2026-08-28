@@ -34,6 +34,12 @@ export const AppConfig = {
   watermarkOpacity: 0.25,
 
   /**
+   * Дефолтная сила размытия иконок на включенном режиме.
+   * Значение в процентах, используется для расчета итогового значения blur.
+   */
+  defaultIconBlurPercent: 10,
+
+  /**
    * Сила затемнения при наведении на карточку.
    * Значение от 0 до 1, где 0 = нет затемнения, 1 = очень тёмное.
    */
@@ -66,6 +72,7 @@ export const cardHoverDarkness = AppConfig.cardHoverDarkness;
 export const cardTitleFontSize = AppConfig.cardTitleFontSize;
 export const cardTitleColor = AppConfig.cardTitleColor;
 export const myCoversPulseDurationMs = AppConfig.myCoversPulseDurationMs;
+export const defaultIconBlurPercent = AppConfig.defaultIconBlurPercent;
 
 export default AppConfig;
 
