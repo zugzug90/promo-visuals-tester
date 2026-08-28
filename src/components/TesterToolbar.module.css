@@ -146,27 +146,30 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background: rgba(187, 134, 252, 0.17);
-  border: 1px solid rgba(187, 134, 252, 0.35);
-  color: #d6b7ff;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 5px 12px;
-  border-radius: 8px;
+  background: rgba(222, 103, 255, 0.22);
+  border: 2px solid rgba(255, 134, 250, 0.8);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 12px;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.2s ease;
   font-family: inherit;
+  box-shadow: 0 0 0 1px rgba(255, 129, 255, 0.25), 0 6px 18px rgba(190, 93, 255, 0.24);
 }
 
 .linkBtn:hover {
-  background: rgba(187, 134, 252, 0.32);
-  color: #fff;
+  background: rgba(255, 120, 215, 0.28);
+  border-color: rgba(255, 119, 235, 1);
+  box-shadow: 0 0 12px rgba(255, 119, 235, 0.85), 0 8px 28px rgba(255, 96, 245, 0.18);
+  color: #ffffff;
 }
 
 .linkIcon {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   object-fit: contain;
 }
 
