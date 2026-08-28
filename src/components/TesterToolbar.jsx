@@ -21,6 +21,7 @@ function TesterToolbar({ isGrayscaleMode, toggleGrayscaleMode, isBlurMode, toggl
     uploadedImages,
     clearAllImages,
     randomizeAllImages,
+    shuffleMyImages,
     aspectRatio,
     setAspectRatio,
     objectFit,
@@ -87,6 +88,15 @@ function TesterToolbar({ isGrayscaleMode, toggleGrayscaleMode, isBlurMode, toggl
 
         <button className={styles.clearBtn} onClick={randomizeAllImages} title="Выбрать случайные промо из образцов">
           🎲 Перемешать случайные
+        </button>
+
+        <button
+          className={`${styles.clearBtn} ${uploadedCount < 1 ? styles.disabledBtn : ''}`}
+          onClick={shuffleMyImages}
+          title={uploadedCount < 1 ? 'Нужна хотя бы 1 пользовательская картинка' : 'Перемешать только пользовательские изображения'}
+          disabled={uploadedCount < 1}
+        >
+          🧩 Перемешать Мои
         </button>
 
         <button

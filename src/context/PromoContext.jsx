@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, useEffect } from 'react';
-import { getAllGameIds, ICON_STRIP_GAMES } from '../data/games.js';
+import { getAllGameIds, ICON_STRIP_GAMES, SECTIONS } from '../data/games.js';
 import {
   generateRandomImageMap,
   generateRandomIconMap,
@@ -8,6 +8,48 @@ import {
 } from '../utils/promoSamples.js';
 
 const PromoContext = createContext();
+
+function shuffleArray(array) {
+  const result = array.slice();
+  for (let i = result.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+function shuffleUploadedGroup(prev, groupIds) {
+  const groupKeys = Object.keys(prev).filter((key) => groupIds.includes(Number(key)));
+  if (groupKeys.length === 0) return {};
+
+  const currentValues = groupKeys.map((key) => prev[key]);
+
+  if (groupKeys.length === 1) {
+    const [currentKey] = groupKeys;
+    const candidateKeys = groupIds.map(String).filter((id) => id !== currentKey);
+    if (candidateKeys.length === 0) return {};
+    const nextKey = candidateKeys[Math.floor(Math.random() * candidateKeys.length)];
+    return { [nextKey]: currentValues[0] };
+  }
+
+  let newKeys = shuffleArray(groupKeys);
+  let attempts = 0;
+
+  while (
+    attempts < 20 &&
+    newKeys.every((key, index) => key === groupKeys[index])
+  ) {
+    newKeys = shuffleArray(groupKeys);
+    attempts += 1;
+  }
+
+  if (newKeys.every((key, index) => key === groupKeys[index])) return {};
+
+  return groupKeys.reduce((next, key, index) => {
+    next[newKeys[index]] = currentValues[index];
+    return next;
+  }, {});
+}
 
 const UPLOADED_STORAGE_KEY = 'yg_promo_custom_uploads';
 const LEGACY_STORAGE_KEY = 'yg_promo_images';
@@ -90,6 +132,29 @@ export function PromoProvider({ children }) {
     }));
   };
 
+  const cardGroupIds = SECTIONS.flatMap((section) => section.games.map((game) => game.id));
+  const iconGroupIds = ICON_STRIP_GAMES.map((game) => game.id);
+
+  const shuffleMyImages = () => {
+    setUploadedImages((prev) => {
+      const cardShuffle = shuffleUploadedGroup(prev, cardGroupIds);
+      const iconShuffle = shuffleUploadedGroup(prev, iconGroupIds);
+
+      const next = { ...prev };
+      Object.keys(prev).forEach((key) => {
+        if (cardGroupIds.includes(Number(key)) || iconGroupIds.includes(Number(key))) {
+          delete next[key];
+        }
+      });
+
+      return {
+        ...next,
+        ...cardShuffle,
+        ...iconShuffle,
+      };
+    });
+  };
+
   const randomizeAllImages = () => {
     const allGameIds = getAllGameIds();
     // Reshuffle sample images for unassigned slots; custom uploaded images remain in place
@@ -121,6 +186,7 @@ export function PromoProvider({ children }) {
         isUploaded,
         setCardImage,
         removeCardImage,
+        shuffleMyImages,
         randomizeAllImages,
         clearAllImages,
         aspectRatio,
