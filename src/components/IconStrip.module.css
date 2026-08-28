@@ -54,6 +54,10 @@
   box-shadow: 0 0 0 2px #7c66ff, 0 0 14px rgba(124, 102, 255, 0.6);
 }
 
+.tileHighlighted {
+  animation: iconPulse var(--pulse-duration, 3s) ease-in-out infinite;
+}
+
 /* ── Thumb: square 1:1 ── */
 .thumb {
   width: 99px;
@@ -82,4 +86,45 @@
   justify-content: center;
   font-size: 18px;
   color: #fff;
+}
+
+.emptyHint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.uploadIcon {
+  font-size: 22px;
+}
+
+.uploadText {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+@keyframes iconPulse {
+  0% {
+    box-shadow:
+      0 0 0 2px var(--pulse-color, #ffe033),
+      0 0 14px color-mix(in srgb, var(--pulse-color, #ffe033) 55%, transparent),
+      0 0 30px color-mix(in srgb, var(--pulse-color, #ffe033) 25%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 0 0 3.5px var(--pulse-color, #ffe033),
+      0 0 28px var(--pulse-color, #ffe033),
+      0 0 60px color-mix(in srgb, var(--pulse-color, #ffe033) 55%, transparent),
+      0 0 90px color-mix(in srgb, var(--pulse-color, #ffe033) 20%, transparent);
+  }
+  100% {
+    box-shadow:
+      0 0 0 2px var(--pulse-color, #ffe033),
+      0 0 14px color-mix(in srgb, var(--pulse-color, #ffe033) 55%, transparent),
+      0 0 30px color-mix(in srgb, var(--pulse-color, #ffe033) 25%, transparent);
+  }
 }
