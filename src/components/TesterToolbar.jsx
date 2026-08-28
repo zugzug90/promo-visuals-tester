@@ -15,7 +15,7 @@ const FIT_MODES = [
 
 const TELEGRAM_ICON_SRC = `${import.meta.env.BASE_URL}telegram_icon.png`;
 
-function TesterToolbar() {
+function TesterToolbar({ isGrayscaleMode, toggleGrayscaleMode }) {
   const {
     images,
     uploadedImages,
@@ -95,6 +95,14 @@ function TesterToolbar() {
           title="Подсветить карточки с вашими загрузками"
         >
           {highlightMyCovers ? '💡 Скрыть Мои Обложки' : '💡 Подсветить Мои Обложки'}
+        </button>
+
+        <button
+          className={`${styles.modeBtn} ${isGrayscaleMode ? styles.modeBtnActive : ''}`}
+          onClick={toggleGrayscaleMode}
+          title="Включить или выключить черно-белый режим"
+        >
+          {isGrayscaleMode ? '🖤 Выключить ЧБ' : '🖤 Включить ЧБ'}
         </button>
 
         <a

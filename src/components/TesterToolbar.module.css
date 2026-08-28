@@ -180,6 +180,28 @@
   animation: btnGlowPulse 2.4s ease-in-out infinite;
 }
 
+.modeBtn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.modeBtn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.modeBtnActive {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
 @keyframes btnGlowPulse {
   0%   { box-shadow: 0 0 10px rgba(32, 196, 255, 0.5), 0 0 3px rgba(32, 196, 255, 0.8); }
   50%  { box-shadow: 0 0 22px rgba(32, 196, 255, 0.9), 0 0 8px rgba(32, 196, 255, 1); }
